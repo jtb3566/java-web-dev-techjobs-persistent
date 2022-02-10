@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,9 +64,10 @@ public class HomeController {
         return "redirect:";
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
-
+        model.addAttribute("job", jobRepository.findById(jobId).get());
         return "view";
     }
 
